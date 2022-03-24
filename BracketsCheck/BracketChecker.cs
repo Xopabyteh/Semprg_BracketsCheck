@@ -4,19 +4,19 @@ namespace BracketsCheck;
 
 public class BracketChecker
 {
-    private static readonly (char, int)[] OpeningBracketsTuple = new (char, int)[]
+    protected static readonly (char, int)[] OpeningBracketsTuple = new (char, int)[]
     {
         ('(',1),
         ('[',2),
         ('{',3)
     };
-    private static readonly (char, int)[] ClosingBracketsTuple = new (char, int)[]
+    protected static readonly (char, int)[] ClosingBracketsTuple = new (char, int)[]
     {
         (')',1),
         (']',2),
         ('}',3)
     };
-    private bool Test(string inp)
+    protected virtual bool Test(string inp)
     {
         Stack<int> bracketIDStack = new Stack<int>();
         foreach (var c in inp)  
@@ -28,6 +28,7 @@ public class BracketChecker
                 if (valueTuple.Item1.Equals(c))
                 {
                     bracketIDStack.Push(valueTuple.Item2);
+                    break;
                 }
             }
             //Case closing bracket
@@ -43,13 +44,24 @@ public class BracketChecker
                 }
             }
         }
-
         return true;
     }
 
     public void WriteTest(string inp, bool expected)
     {
         bool result = Test(inp);
-        Console.WriteLine($"{(expected == result ? "SUCCESS" : "FAIL")} \t inp: {inp}, expect: {expected}, result: {result}");
+        string msg = string.Empty;
+        if (expected == result)
+        {
+            msg = "SUCCESS";
+            Console.BackgroundColor = ConsoleColor.DarkGreen;
+        }
+        else
+        {
+            msg = "FAIL";
+            Console.BackgroundColor = ConsoleColor.DarkRed;
+        }
+        Console.WriteLine($"{msg.PadRight(15)} inp: {inp}, expect: {expected}, result: {result}");
+        Console.BackgroundColor = ConsoleColor.Black; 
     }
 }
