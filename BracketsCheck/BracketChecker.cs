@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace BracketsCheck;
+﻿namespace BracketsCheck;
 
 public class BracketChecker
 {
@@ -16,7 +14,7 @@ public class BracketChecker
         (']',2),
         ('}',3)
     };
-    protected virtual bool Test(string inp)
+    public virtual bool BracketsCorrect(string inp)
     {
         Stack<int> bracketIDStack = new Stack<int>();
         foreach (var c in inp)  
@@ -47,9 +45,9 @@ public class BracketChecker
         return true;
     }
 
-    public void WriteTest(string inp, bool expected)
+    /*public void WriteTest(string inp, bool expected)
     {
-        bool result = Test(inp);
+        bool result = BracketsCorrect(inp);
         string msg = string.Empty;
         if (expected == result)
         {
@@ -63,5 +61,5 @@ public class BracketChecker
         }
         Console.WriteLine($"{msg.PadRight(15)} inp: {inp}, expect: {expected}, result: {result}");
         Console.BackgroundColor = ConsoleColor.Black; 
-    }
+    }*/
 }

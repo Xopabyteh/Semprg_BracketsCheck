@@ -5,7 +5,7 @@
 
 public class StringBasedBracketChecker : BracketChecker
 {
-    protected override bool Test(string inp)
+    public override bool BracketsCorrect(string inp)
     {
         for (int i = 0; i < inp.Length; i++)
         {
